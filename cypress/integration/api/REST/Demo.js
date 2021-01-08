@@ -39,7 +39,27 @@ describe('HTTP example', () => {
         });
     })
 
+    it('PUT', () => {
+        cy.request({
+            method : 'PUT', 
+            url : 'https://httpbin.org/put',
+            body : {
+            "name" : "Nikhil"
+            }
+        }).then((res) => {
+            expect(res.body).to.have.property('json');
+            expect(res.body.json).to.deep.equal({"name" : "Nikhil"});
+        });
+    })
 
 
+    it('PATCH', () => {
+        cy.request('PATCH', 'https://httpbin.org/patch',{
+            "name" : "Nikhil"
+        }).then((res) => {
+            expect(res.body).to.have.property('json');
+            expect(res.body.json).to.deep.equal({"name" : "Nikhil"});
+        })
+    })
 
-})
+});
